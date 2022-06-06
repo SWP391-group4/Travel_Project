@@ -9,7 +9,6 @@ import Entity.Hotels;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.Vector;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author thinh
  */
-@WebServlet(name = "HotelList", urlPatterns = {"/hotellist"})
-public class HotelList extends HttpServlet {
+@WebServlet(name = "HotelSearch", urlPatterns = {"/searchhotel"})
+public class HotelSearch extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,19 +34,14 @@ public class HotelList extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String submit = request.getParameter("Search");
+       String txtSearch = request.getParameter("txt");
+        DAOHotels dao = new DAOHotels();
+       List<Hotels> list=dao.SearchbyProvince(txtSearch);
+              
 
-        if (submit == null) {
-            DAOHotels dao = new DAOHotels();
-            List<Hotels> list = dao.ListHotel();
-
-            request.setAttribute("listh", list);
-
-            request.getRequestDispatcher("/HotelList.jsp").forward(request, response);
-        }
-        else {
-            response.sendRedirect("searchhotel");
-        }
+       request.setAttribute("listh", list);
+        request.setAttribute("txtsearch", txtSearch);
+         request.getRequestDispatcher("/HotelList.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
