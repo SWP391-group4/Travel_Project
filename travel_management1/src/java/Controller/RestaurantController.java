@@ -40,6 +40,7 @@ public class RestaurantController extends HttpServlet {
             List<Restaurants> list = daoRestaurant.listFirstThree();
             request.setAttribute("list", list);
 //            Comment anything
+//Comment here
             request.getRequestDispatcher("Restaurant.jsp").forward(request, response);
         }
     }
