@@ -114,11 +114,11 @@ public class Hotels {
 
  
 
-    public Hotels(String hotelName, String addressId, String ServiceId, String image) {
-        this.hotelName = hotelName;
-        this.addressId = addressId;
-        this.ServiceId = ServiceId;
-        this.image = image;
+    public Hotels(String city, String district, String specific, String ward) {
+        this.city = city;
+        this.district = district;
+        this.specific = specific;
+        this.ward = ward;
     }
 
     public Hotels(String hotelID, String hotelName) {
